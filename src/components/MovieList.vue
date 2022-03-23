@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import MovieItem from '~/component/MovieItem'
+// import MovieItem from '~/component/MovieItem'
 export default {
   data(){
     return{
