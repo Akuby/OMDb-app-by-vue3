@@ -3,17 +3,21 @@
     <div class="inner">
       <MovieItem 
       v-for="movie in movies" 
-      :key="movie.imdbID"></MovieItem>
+      :key="movie.imdbID"
+      :movie = "movie" />
     </div>
   </div>
 </template>
 
 <script>
-// import MovieItem from '~/component/MovieItem'
+import MovieItem from '~/components/MovieItem'
 export default {
-  data(){
-    return{
-      movies : []
+  components : {
+    MovieItem
+  },
+  computed : {
+    movies() {
+      return this.$store.state.movie.movies
     }
   }
 }
