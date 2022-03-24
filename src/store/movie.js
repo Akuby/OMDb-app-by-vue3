@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _uniqBy from 'lodash/uniqBy'
 export default {
   // module화 돼서 사용될 수 있음을 명시
   namespaced : true,
@@ -23,15 +24,30 @@ export default {
   },
   // 비동기로 동작
   actions : {
-    async searchMovies(context, payload) {
+    async searchMovies({ state, commit }, payload) {
         const { title, type, number, year } = payload
         const OMDB_API_KEY = '7035c60c'
         const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=1`)
         const { Search , totalResults } = res.data
-        console.log(Search)
-        context.commit('updateState', {
-          movies : Search
+        commit('updateState', {
+          movies : _uniqBy(Search, 'imdbID')
         })
+        const total = parseInt(totalResults, 10)
+        const pageLength = Math.ceil(total / 10)
+
+        if (pageLength > 1) {
+          for (let page = 2; page <= pageLength; page++){
+            if( page > (number / 10) ) break
+            const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`)
+            const { Search } = res.data
+            commit('updateState', {
+              movies : [
+                ...state.movies, 
+                ..._uniqBy(Search, 'imdbID')
+              ]
+          })
+        }
+      }
     }
   }
 }
