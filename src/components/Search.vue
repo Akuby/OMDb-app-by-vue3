@@ -66,7 +66,7 @@ export default {
     }
   },
   methods : {
-    async apply() {
+   apply() { 
       this.$store.dispatch('movie/searchMovies',{
         title : this.title,
         type : this.type,
