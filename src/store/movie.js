@@ -36,7 +36,7 @@ export default {
         commit('updateState', {
           //state의 movies에 Search를 넣을건데, _uniqBy를 imdbID를 기준으로 실행해서 넣겠다.
           movies: _uniqBy(Search, 'imdbID'),
-          message : ''
+          message : 'Search for the movie title!'
         })
 
         const total = parseInt(totalResults, 10)  // totalResults가 String이라 int로 변환해줌

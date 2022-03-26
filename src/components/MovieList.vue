@@ -1,10 +1,14 @@
 <template>
   <div class="container">
     <div class="inner">
-      <div class="message">
+      <div 
+      v-if="message"
+      class="message">
         {{ message }}
       </div>
-      <div class="movies">
+      <div 
+      v-else
+      class="movies">
         <MovieItem 
          v-for="movie in movies" 
          :key="movie.imdbID"
@@ -32,11 +36,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~/scss/main";
 .container{
-  .movies{
+  margin-top: 30px;
+  .inner{
+    background-color: $gray-200;
+    padding: 10px 0;
+    border-radius: 4px;
+    .movies{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+  }
   }
 }
 </style>
