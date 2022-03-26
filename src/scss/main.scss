@@ -1,6 +1,13 @@
 //Default variable overrides
 
 $primary : #FEC000;
+$container-max-widths: (
+  sm: 540px,
+  md : 704px,
+  lg : 924px,
+  xl : 1140px,
+  xxl : 1364px
+);
 
 
 //Required
