@@ -7,7 +7,7 @@ export default {
   // 참조형 데이터는, 하나의 함수로 그 안에서 객체 데이터 반환해야 데이터 불변성 문제가 없음
   state: () => ({
     movies: [], //영화의 목록
-    message : '', //에러 시 노출할 메세지
+    message : 'Search for the movie title!', //안내문
     loading : false
   }),
   // vue의 computed와 같다
@@ -20,14 +20,19 @@ export default {
       Object.keys(payload).forEach(key => {
         state[key] = payload[key]
       })
-    },
-    resetMovies(state) {
-      state.movies = []
     }
   },
   // 비동기로 동작
   actions: {
     async searchMovies({ state, commit }, payload) {
+
+      if (state.loading) return //함수 종료
+
+      commit('updateState', {
+        message : '',
+        loading : true,
+        movies : []
+      })
       try {
         const res = await _fetchMovie({ ...payload, page: 1 }) // 요래 주면 page가 payload 안으로 쏙!
         const { Search, totalResults } = res.data
@@ -35,8 +40,7 @@ export default {
         // mutations의 updateState를 쓸거고, 두번째 인수로 updateState에 payload로 넣어줄 객체를 적어준다.
         commit('updateState', {
           //state의 movies에 Search를 넣을건데, _uniqBy를 imdbID를 기준으로 실행해서 넣겠다.
-          movies: _uniqBy(Search, 'imdbID'),
-          message : 'Search for the movie title!'
+          movies: _uniqBy(Search, 'imdbID')
         })
 
         const total = parseInt(totalResults, 10)  // totalResults가 String이라 int로 변환해줌
@@ -62,6 +66,11 @@ export default {
         commit('updateState',{
           movies : [],
           message
+        })
+      }
+      finally {
+        commit('updateState', {
+          loading : false
         })
       }
     }
