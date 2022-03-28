@@ -4,11 +4,10 @@ import Movie from './Movie'
 import About from './About'
 
 export default createRouter({
-  // Hash
-  // https://google.com/#/search
+  // Hash. https://google.com/#/search
   history : createWebHashHistory(),
-  //pages 구분
-  // https://google.com/about
+
+  //pages 구분. https://google.com/about
   routes : [
     {
       path : '/',
@@ -19,7 +18,7 @@ export default createRouter({
       component : About
     },
     {
-      path : "/movie",
+      path : "/movie/:id",
       component : Movie
     }
   ]
