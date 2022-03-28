@@ -37,6 +37,7 @@ export default {
   background-size: cover;
   overflow: hidden;
   transition: 1s;
+  cursor: pointer;
   &:hover::after{
     content: "";
     position: absolute;

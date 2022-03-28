@@ -15,7 +15,7 @@
 <style lang="scss" scoped>
 @import "~/scss/main";
 .container{
-    padding-top: 20px;
+    padding-top: 30px;
   }
   h1{
     line-height : 1;

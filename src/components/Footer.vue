@@ -24,6 +24,9 @@ footer{
   opacity: .3;
   .logo{
     display: block;//Logo 컴포넌트의 RouterLink는 a태그로 변환된다.
+    width: 120px;
+    height: 30px;
+    margin: auto;
     margin-bottom: 4px;
   }
 }

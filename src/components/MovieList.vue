@@ -40,7 +40,7 @@
 
   .container {
     margin-top: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 
     .inner {
       background-color: $gray-200;
