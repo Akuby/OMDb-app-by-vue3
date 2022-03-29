@@ -29,6 +29,16 @@
         </div>
         <div class="ratings">
           <h3>Ratings</h3>
+          <div class="rating-wrap">
+            <div 
+            v-for="{ Source: name, Value: score } in theMovie.Ratings"
+            :key="name"
+            :title="name"
+            class="rating">
+              <img :src="`https://raw.githubusercontent.com/ParkYoungWoong/vue3-movie-app/master/src/assets/${name}.png`" :alt="name">
+              <span>{{ score }}</span>
+            </div>
+          </div>
         </div>
         <div>
           <h3>Actors</h3>
@@ -78,7 +88,15 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped> .skeletons{
+<style lang="scss" scoped>
+@import "~/scss/main";
+@keyframes shimmer {
+  0% { background-position: -700px 0; }
+  100% { background-position: 700px 0; }
+}
+.container{
+  padding-top: 40px;
+  .skeletons{
     display: flex;
     
     .poster{
@@ -209,7 +227,19 @@ export default {
         margin-top : 20px;
       }
       .ratings{
-
+        .rating-wrap{
+          display: flex;
+          .rating{
+            display: flex;
+            align-items: center;
+            margin-right: 32px;
+            > img{
+              height: 30px;
+              flex-shrink: 0;
+              margin-right: 6px;
+            }
+          }
+        }
       }
       h3{
         margin: 24px 0 6px;
