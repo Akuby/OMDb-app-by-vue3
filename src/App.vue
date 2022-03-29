@@ -17,4 +17,7 @@ export default {
 
 <style lang="scss">
 @import "~/scss/main";
+body{
+  font-family: 'Roboto Slab', sans-serif;
+}
 </style>
