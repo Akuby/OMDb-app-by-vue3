@@ -20,9 +20,9 @@
           {{ theMovie.Title }}
         </div>
         <div class="labels">
-          <span>{{ theMovie.Released }}  &#183;  </span>
-          <span>  {{ theMovie.Runtime }}  &#183;  </span>
-          <span>  {{ theMovie.Country }}</span>
+          <span>{{ theMovie.Released }}</span>
+          <span>{{ theMovie.Runtime }}</span>
+          <span>{{ theMovie.Country }}</span>
         </div>
         <div class="plot">
           {{ theMovie.Plot }}
@@ -198,7 +198,14 @@ export default {
       .labels{
         color: $primary;
         span{
-
+          &::before{
+            content:"\00b7";
+            margin: 0 6px;
+          }
+          &:first-child::before{
+            content: '';
+            margin: 0;
+          }
         }
       }
       .plot{
