@@ -14,6 +14,9 @@
 
     <div v-else class="movie-details">
       <div :style="{backgroundImage : `url(${requestDiffSizeImage(theMovie.Poster)})`}" class="poster">
+        <Loader
+        v-if="imageLoading"
+        absolute />
       </div>
       <div class="specs">
         <div class="title">
@@ -64,6 +67,11 @@
 <script>
 import Loader from '~/components/Loader'
 export default {
+  data(){
+    return{
+      imageLoading : true
+    }
+  },
   computed : { //store에서 가져올거
     theMovie(){
       return this.$store.state.movie.theMovie
@@ -82,7 +90,12 @@ export default {
   },
   methods : {
     requestDiffSizeImage(url, size = 1000) {
-      return url.replace('SX300', `SX${size}`)
+      const src = url.replace('SX300', `SX${size}`)
+      this.$loadImage(src)
+        .then(()=>{
+          this.imageLoading = false
+        })
+      return src
     }
   }
 }
@@ -98,12 +111,12 @@ export default {
   padding-top: 40px;
   .skeletons{
     display: flex;
-    
     .poster{
       flex-shrink: 0;
       width: 500px;
       height: 500 * 3 / 2;
       margin-right: 60px;
+      border-radius: 10px;
       position: relative;
       overflow: hidden;
         &::before{
