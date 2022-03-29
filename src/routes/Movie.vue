@@ -13,7 +13,7 @@
     </div>
 
     <div v-else class="movie-details">
-      <div :style="{backgroundImage : `url(${theMovie.Poster})`}" class="poster">
+      <div :style="{backgroundImage : `url(${requestDiffSizeImage(theMovie.Poster)})`}" class="poster">
       </div>
       <div class="specs">
         <div class="title">
@@ -69,19 +69,16 @@ export default {
     this.$store.dispatch('movie/searchMovieWithId',{
       id : this.$route.params.id
     })
+  },
+  methods : {
+    requestDiffSizeImage(url, size = 1000) {
+      return url.replace('SX300', `SX${size}`)
+    }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-@import "~/scss/main";
-@keyframes shimmer {
-  0% { background-position: -700px 0; }
-  100% { background-position: 700px 0; }
-}
-.container{
-  padding-top: 40px;
-  .skeletons{
+<style lang="scss" scoped> .skeletons{
     display: flex;
     
     .poster{
@@ -179,7 +176,7 @@ export default {
     .poster{
       width: 500px;
       height: 500px * 3 / 2;
-      margin-right: 60px;
+      margin-right: 70px;
       border-radius: 10px;
       background-color: $gray-200;
       background-size: cover;
@@ -209,13 +206,16 @@ export default {
         }
       }
       .plot{
-
+        margin-top : 20px;
       }
       .ratings{
 
       }
       h3{
-
+        margin: 24px 0 6px;
+        color: $black;
+        font-family: "Oswald", sans-serif;
+        font-size: 20px;
       }
     }
   }
