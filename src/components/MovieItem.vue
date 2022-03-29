@@ -2,23 +2,48 @@
   <div 
   :style="{ backgroundImage : `url(${movie.Poster})` }"
   class="movie">
-  <div class="info">
-    <div class="year">
-    {{movie.Year}}
-  </div>
-  <div class="title">
-    {{movie.Title}}
-  </div>
-  </div>
+  <Loader
+  v-if="imageLoading"
+  :size="1.5"
+  absolute></Loader>
+    <div class="info">
+      <div class="year">
+        {{movie.Year}}
+      </div>
+      <div class="title">
+        {{movie.Title}}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import Loader from '~/components/Loader'
 export default {
   props : {
     movie : {
       type : Object,
       default : () => ({})
+    }
+  },
+  components : {
+    Loader
+  },
+  data(){
+    return{
+      imageLoading : true
+    }
+  },
+  mounted(){
+    this.init()
+  },
+  methods : {
+    init(){
+      const img = document.createElement('img')
+      img.src = this.movie.Poster
+      img.addEventListener('load', () => {
+        this.imageLoading = false
+      })
     }
   }
 }
@@ -36,7 +61,6 @@ export default {
   background-color: $gray-400;
   background-size: cover;
   overflow: hidden;
-  transition: 1s;
   cursor: pointer;
   &:hover::after{
     content: "";
