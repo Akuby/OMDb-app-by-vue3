@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="skeletons">
+    <div v-if="loading" class="skeletons">
       <div class="skeleton poster"></div>
       <div class="specs">
         <div class="skeleton title"></div>
@@ -11,17 +11,57 @@
         <div class="skeleton etc"></div>
       </div>
     </div>
-    <Loader
-    :size="3"
-    fixed 
-    :z-index="9"
-    ></Loader>
+
+    <div v-else class="movie-details">
+      <div :style="{backgroundImage : `url(${theMovie.Poster})`}" class="poster">
+      </div>
+      <div class="specs">
+        <div class="title">
+          {{ theMovie.Title }}
+        </div>
+        <div class="labels">
+          <span>{{ theMovie.Released }}  &#183;  </span>
+          <span>  {{ theMovie.Runtime }}  &#183;  </span>
+          <span>  {{ theMovie.Country }}</span>
+        </div>
+        <div class="plot">
+          {{ theMovie.Plot }}
+        </div>
+        <div class="ratings">
+          <h3>Ratings</h3>
+        </div>
+        <div>
+          <h3>Actors</h3>
+          {{ theMovie.Actors }}
+        </div>
+        <div>
+          <h3>Director</h3>
+          {{ theMovie.Director }}
+        </div>
+        <div>
+          <h3>Production</h3>
+          {{ theMovie.Production }}
+        </div>
+        <div>
+          <h3>Genre</h3>
+          {{ theMovie.Genre }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Loader from '~/components/Loader'
 export default {
+  computed : { //store에서 가져올거
+    theMovie(){
+      return this.$store.state.movie.theMovie
+    },
+    loading(){
+      return this.$store.state.movie.loading
+    }
+  },
   components : {
     Loader
   },
@@ -130,6 +170,45 @@ export default {
           background-repeat: no-repeat;
           animation : shimmer 1s linear infinite;
         }
+      }
+    }
+  }
+  .movie-details{
+    display: flex;
+    color : $gray-600;
+    .poster{
+      width: 500px;
+      height: 500px * 3 / 2;
+      margin-right: 60px;
+      border-radius: 10px;
+      background-color: $gray-200;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+    }
+    .specs{
+      flex-grow: 1;
+      .title{
+        color: $black;
+        font-family: 'Oswald', sans-serif;
+        font-size: 70px;
+        line-height: 1;
+        margin-bottom: 30px;
+      }
+      .labels{
+        color: $primary;
+        span{
+
+        }
+      }
+      .plot{
+
+      }
+      .ratings{
+
+      }
+      h3{
+
       }
     }
   }
