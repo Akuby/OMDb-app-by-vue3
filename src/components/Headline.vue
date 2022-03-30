@@ -1,35 +1,189 @@
 <template>
   <div class="container">
+    <div class="logos">
     <h1>
-    <span>OMDb API</span><br />
-    THE OPEN<br />
-    MOVIE DATABASE
+      <span>OMDb API</span><br />
+      THE OPEN<br />
+      MOVIE DATABASE
     </h1>
-  <p>
-    The OMDb API is a RESTful web service to obtain movie information, all content and images on the site are contributed and maintained by our users.<br />
-    If you find this service useful, please consider making a one-time donation or become a patron.
-  </p>
+  <transition
+    appear
+    @before-enter="beforeEnter"
+    @enter="enter"
+  >
+    <div class="wave">
+      <div class="butterfly">
+        <div class="wing">
+          <div class="fly"></div>
+          <div class="fly"></div>
+        </div>
+        <div class="wing">
+          <div class="fly"></div>
+          <div class="fly"></div>
+        </div>
+      </div>
+    </div>
+</transition>
+</div>
+    <p>
+      The OMDb API is a RESTful web service to obtain movie information, all content and images on the site are
+      contributed and maintained by our users.<br />
+      If you find this service useful, please consider making a one-time donation or become a patron.
+    </p>
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import "~/scss/main";
-.container{
-    padding-top: 30px;
+<script>
+import gsap from 'gsap'
+export default {
+  setup(){
+    const beforeEnter = (el) => {
+      el.style.transform = 'translate(0px, 0px)'
+    }
+    const enter = (el) => {
+      gsap.to(el, {
+        duration : 7,
+        y : 266,
+        x : -672,
+      })
+    }
+    return { beforeEnter, enter }
   }
-  h1{
-    line-height : 1;
-    font-family : "Oswald", sans-serif;
-    font-size : 80px;
-    span{
-      color : $primary;
+}
+</script>
+
+
+<style lang="scss" scoped>
+  @import "~/scss/main";
+
+  @keyframes left {
+    0% {
+        transform: rotateY(-60deg);
+    }
+    100% {
+        transform: rotateY(50deg);
     }
 }
-p{
-  font-family: "Roboto Slab", sans-serif;
-  margin : 30px 0;
-  color : $gray-600;
+  @keyframes right {
+    0% {
+        transform: rotateY(180deg);
+    }
+    100% {
+        transform: rotateY(80deg);
+    }
 }
 
-  
+// @keyframes fly {
+//   0% { transform: translate(0px, 0px); }
+//   11% { transform: translate(-200px, 180px);}
+//   22%{ transform: translate(-200px, 200px); }
+//   33%{ transform: translate(-400px, 150px); }
+//   44%{ transform: translate(-500px, 200px); }
+//   55%{ transform: translate(-700px, 120px); }
+//   66%{ transform: translate(-700px, 120px); }
+//   77%{ transform: translate(-700px, 120px); }
+//   88%{ transform: translate(-700px, 120px); }
+//   100%{ transform: translate(-700px, 120px); }
+// }
+
+
+  .container {
+    padding-top: 30px;
+    .logos{
+      display: flex;
+    }
+  }
+
+  h1 {
+    line-height: 1;
+    font-family: "Oswald", sans-serif;
+    font-size: 80px;
+
+    span {
+      color: $primary;
+    }
+  }
+  .wave{
+  position: absolute;
+    right: 0px;
+    top: 0px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    filter: drop-shadow(30px 10px 4px #c4c4c4);
+    // animation: fly 5s infinite;
+}
+
+.butterfly {
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(60deg) rotateY(30deg) rotateZ(-50deg);
+    width: 60px;
+    
+    &::before {
+        background: orange;
+        border-radius: 40%;
+        content: '';
+        display: block;
+        margin-left:-10px;
+        position: absolute;
+        top: -15px;
+        transform: rotatey(100deg);
+        width: 10px;
+        height: 40px;
+        right: 5%;
+        z-index: 2;
+    }
+}
+.wing {
+    display: block;
+    position: absolute;
+    top: -18px;
+    right: 28%;
+    
+    &:first-child {
+        animation: left 1s infinite;
+        animation-direction: alternate;
+        animation-fill-mode: reverse;
+        z-index: 3;
+    }
+    
+    &:last-child {
+        animation: right 1s infinite;
+        animation-direction: alternate;
+        animation-fill-mode: reverse;
+        right:0;
+        z-index: 1;
+    }
+    
+    .fly, .fly::after {
+        background: $primary;
+        transform-origin: 100% 50%;
+        overflow: hidden;
+        position: absolute;
+        border-radius: 50%;
+        right: 0;
+        top: 0;
+    }
+    
+    .fly:first-child {
+        height: 35px;
+        text-align: center;
+        top: 2px;
+        transform: rotateZ(30deg);
+        width: 50px;
+    }
+    
+    .fly:last-child {
+        height: 48px;
+        transform: rotateZ(-30deg);
+        width: 30px;
+    }
+}
+
+  p {
+    font-family: "Roboto Slab", sans-serif;
+    margin: 30px 0;
+    color: $gray-600;
+  }
 </style>
