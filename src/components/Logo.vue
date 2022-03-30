@@ -12,7 +12,7 @@
   font-size: 20px;
   color: $black;
   &:hover {
-    color: $black;
+    color: rgb(60, 60, 60);
   }
   span {
     color : $primary;
