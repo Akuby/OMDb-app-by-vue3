@@ -14,9 +14,6 @@
 
     <div v-else class="movie-details">
       <div :style="{backgroundImage : `url(${requestDiffSizeImage(theMovie.Poster)})`}" class="poster">
-        <Loader
-        v-if="imageLoading"
-        absolute />
       </div>
       <div class="specs">
         <div class="title">
@@ -80,9 +77,6 @@ export default {
       return this.$store.state.movie.loading
     }
   },
-  components : {
-    Loader
-  },
   created(){
     this.$store.dispatch('movie/searchMovieWithId',{
       id : this.$route.params.id
@@ -120,7 +114,6 @@ export default {
       width: 500px;
       height: 500 * 3 / 2;
       margin-right: 60px;
-      border-radius: 10px;
       position: relative;
       overflow: hidden;
         &::before{

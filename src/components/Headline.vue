@@ -38,13 +38,15 @@ import gsap from 'gsap'
 export default {
   setup(){
     const beforeEnter = (el) => {
-      el.style.transform = 'translate(0px, 0px)'
+      el.style.transform = 'translate(-520px, 0px)'
     }
-    const enter = (el) => {
+    const enter = (el, done) => {
       gsap.to(el, {
-        duration : 7,
+        duration : 5,
         y : 266,
-        x : -672,
+        x : -852,
+        ease : "easeIn",
+        onComplete : done
       })
     }
     return { beforeEnter, enter }
@@ -75,15 +77,13 @@ export default {
 
 // @keyframes fly {
 //   0% { transform: translate(0px, 0px); }
-//   11% { transform: translate(-200px, 180px);}
-//   22%{ transform: translate(-200px, 200px); }
-//   33%{ transform: translate(-400px, 150px); }
-//   44%{ transform: translate(-500px, 200px); }
-//   55%{ transform: translate(-700px, 120px); }
-//   66%{ transform: translate(-700px, 120px); }
-//   77%{ transform: translate(-700px, 120px); }
-//   88%{ transform: translate(-700px, 120px); }
-//   100%{ transform: translate(-700px, 120px); }
+//   14% { transform: translate(-200px, 180px);}
+//   28%{ transform: translate(-288px, 90px); }
+//   42%{ transform: translate(-386px, 200px); }
+//   56%{ transform: translate(-494px, 100px); }
+//   70%{ transform: translate(-612px, 220px); }
+//   84%{ transform: translate(-730px, 200px); }
+//   100%{ transform: translate(-850px, 265px); }
 // }
 
 
@@ -110,8 +110,8 @@ export default {
     align-items: center;
     display: flex;
     justify-content: center;
-    filter: drop-shadow(30px 10px 4px #c4c4c4);
-    // animation: fly 5s infinite;
+    // filter: drop-shadow(30px 10px 4px #c4c4c4);
+    // animation: fly 8s;
 }
 
 .butterfly {
