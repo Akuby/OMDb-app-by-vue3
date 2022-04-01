@@ -1,10 +1,9 @@
 <template>
   <footer>
     <Logo></Logo>
-    <a href="https://github.com/Akuby"
-    target="_blank">
+    <div class="c">
     (c){{ new Date().getFullYear() }} Akuby
-    </a>
+    </div>
   </footer>
 </template>
 
@@ -18,16 +17,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~/scss/main";
 footer{
   padding: 70px 0;
   text-align: center;
   opacity: .3;
   .logo{
     display: block;//Logo 컴포넌트의 RouterLink는 a태그로 변환된다.
-    width: 120px;
-    height: 30px;
-    margin: auto;
     margin-bottom: 4px;
+  }
+  .c{
+    color : $primary;
+    text-decoration: underline;
+    margin-top: -5px;
   }
 }
 </style>
