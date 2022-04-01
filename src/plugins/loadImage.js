@@ -1,3 +1,4 @@
+//비동기 동작. async await 필수!!
 export default{
   install(app) {
     app.config.globalProperties.$loadImage = (src) => {

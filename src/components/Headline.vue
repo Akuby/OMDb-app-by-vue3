@@ -1,17 +1,11 @@
 <template>
   <div class="container">
-    <div class="logos">
     <h1>
       <span>OMDb API</span><br />
       THE OPEN<br />
       MOVIE DATABASE
     </h1>
-  <transition
-    appear
-    @before-enter="beforeEnter"
-    @enter="enter"
-  >
-    <div class="wave">
+    <!-- <div class="wave">
       <div class="butterfly">
         <div class="wing">
           <div class="fly"></div>
@@ -22,9 +16,7 @@
           <div class="fly"></div>
         </div>
       </div>
-    </div>
-</transition>
-</div>
+      </div> -->
     <p>
       The OMDb API is a RESTful web service to obtain movie information, all content and images on the site are
       contributed and maintained by our users.<br />
@@ -34,30 +26,17 @@
 </template>
 
 <script>
-import gsap from 'gsap'
 export default {
-  setup(){
-    const beforeEnter = (el) => {
-      el.style.transform = 'translate(-520px, 0px)'
-    }
-    const enter = (el, done) => {
-      gsap.to(el, {
-        duration : 5,
-        y : 266,
-        x : -852,
-        ease : "easeIn",
-        onComplete : done
-      })
-    }
-    return { beforeEnter, enter }
-  }
 }
 </script>
 
 
 <style lang="scss" scoped>
   @import "~/scss/main";
-
+  @keyframes myOrbit {
+    from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+}
   @keyframes left {
     0% {
         transform: rotateY(-60deg);
@@ -74,24 +53,8 @@ export default {
         transform: rotateY(80deg);
     }
 }
-
-// @keyframes fly {
-//   0% { transform: translate(0px, 0px); }
-//   14% { transform: translate(-200px, 180px);}
-//   28%{ transform: translate(-288px, 90px); }
-//   42%{ transform: translate(-386px, 200px); }
-//   56%{ transform: translate(-494px, 100px); }
-//   70%{ transform: translate(-612px, 220px); }
-//   84%{ transform: translate(-730px, 200px); }
-//   100%{ transform: translate(-850px, 265px); }
-// }
-
-
   .container {
     padding-top: 30px;
-    .logos{
-      display: flex;
-    }
   }
 
   h1 {
@@ -103,17 +66,13 @@ export default {
       color: $primary;
     }
   }
-  .wave{
-  position: absolute;
-    right: 0px;
-    top: 0px;
+    .wave{
+    position: absolute;
     align-items: center;
     display: flex;
     justify-content: center;
-    // filter: drop-shadow(30px 10px 4px #c4c4c4);
-    // animation: fly 8s;
+    filter: drop-shadow(30px 10px 4px #c4c4c4);
 }
-
 .butterfly {
     position: relative;
     transform-style: preserve-3d;

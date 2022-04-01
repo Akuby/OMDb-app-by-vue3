@@ -4,6 +4,7 @@ import about from './about'
 
 export default createStore({
   modules : {
-    movie
+    movie,
+    about
   }
 })
