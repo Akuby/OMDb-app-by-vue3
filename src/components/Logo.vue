@@ -5,7 +5,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import "~/scss/main";
 .logo{
   text-decoration: none;
   font-family: "Oswald", sans-serif;

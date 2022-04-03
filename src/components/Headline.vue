@@ -32,7 +32,6 @@ export default {
 
 
 <style lang="scss" scoped>
-  @import "~/scss/main";
   @keyframes myOrbit {
     from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
     to   { transform: rotate(360deg) translateX(150px) rotate(-360deg); }

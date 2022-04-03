@@ -100,7 +100,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~/scss/main";
 @keyframes shimmer {
   0% { background-position: -700px 0; }
   100% { background-position: 700px 0; }
