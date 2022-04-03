@@ -15,6 +15,13 @@
         </RouterLink>
       </div>
     </div>
+    <div
+    @click="toAbout"
+    class="user">
+      <img 
+      src="https://avatars.githubusercontent.com/u/96938229?v=4" 
+      :alt="name" />
+    </div>
   </header>
 </template>
 
@@ -47,12 +54,24 @@ export default {
     isMatch(path){
       if(!path) return false //Search와 About 탭의 경우 (path 속성이 없음)
       else return path.test(this.$route.fullPath) //test()로 RegExp을 만족하는지 Boolean으로 반환
+    },
+    toAbout(){
+      this.$router.push('/about')
+    }
+  },
+  computed : {
+    name(){
+      return this.$store.state.about.name
+    },
+    image(){
+      return this.$store.state.about.image
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import "~/scss/main";
   header {
     height: 70px;
     padding: 0 40px;
@@ -62,5 +81,36 @@ export default {
   .logo {
     margin-right: 40px;
   }
+  .user{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 6px;
+    border: 4px solid $gray-200;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left : 1300px;
+    margin: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition : .3s;
+    &:hover{
+      border-color: $primary;
   }
+    img{
+      width: 145%;
+
+    }
+  }
+  @include media-breakpoint-down(sm){
+    .nav{
+      display: none;
+    }
+  }
+}
 </style>
