@@ -91,7 +91,7 @@ export default {
     position: absolute;
     top: 0;
     bottom: 0;
-    left : 1300px;
+    left : 1400px;
     margin: auto;
     overflow: hidden;
     display: flex;
