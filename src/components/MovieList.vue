@@ -16,21 +16,18 @@
 <script>
   import MovieItem from '~/components/MovieItem'
   import Loader from '~/components/Loader'
+  import { mapState } from 'vuex'
   export default {
     components: {
       MovieItem,
       Loader
     },
     computed: {
-      movies() {
-        return this.$store.state.movie.movies //여기서 this는 정확히 어딜 가리키나..? src폴더? 그리고 왜 모듈명이 아닌 state를 먼저 적나?
-      },
-      message() {
-        return this.$store.state.movie.message
-      },
-      loading() {
-        return this.$store.state.movie.loading
-      }
+      ...mapState('movie', [
+        'movies',
+        'message',
+        'loading'
+      ])
     }
   }
 </script>

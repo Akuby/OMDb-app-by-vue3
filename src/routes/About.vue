@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex"
 export default {
   data(){
     return {
@@ -23,27 +24,15 @@ export default {
     }
   },
   computed : {
-    image() {
-      return this.$store.state.about.image
-    },
-    name() {
-      return this.$store.state.about.name
-    },
-    email(){
-      return this.$store.state.about.email
-    },
-    blog() {
-      return this.$store.state.about.blog
-    },
-    phone() {
-      return this.$store.state.about.phone
-    },
-    //라이프사이클에서는 비동기 사용 불가 
-    mounted(){
-      this.init()
+    ...mapState('about', [
+      'image',
+      'name',
+      'email',
+      'blog',
+      'phone'
+    ])
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>

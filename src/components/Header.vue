@@ -27,6 +27,7 @@
 
 <script>
 import Logo from '~/components/Logo'
+import { mapState } from 'vuex'
 export default {
   data(){
     return {
@@ -37,7 +38,7 @@ export default {
         },
         {
           name:'Movie',
-          href: '/movie/tt4520988',
+          href: '/movie/tt0118799',
           path: /^\/movie/
         },
         {
@@ -60,12 +61,10 @@ export default {
     }
   },
   computed : {
-    name(){
-      return this.$store.state.about.name
-    },
-    image(){
-      return this.$store.state.about.image
-    }
+    ...mapState('about', [
+      'image',
+      'name'
+    ])
   }
 }
 </script>

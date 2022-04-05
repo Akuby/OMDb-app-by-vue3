@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import Loader from '~/components/Loader'
+import { mapState } from "vuex"
 export default {
   data(){
     return{
@@ -70,12 +70,10 @@ export default {
     }
   },
   computed : { //store에서 가져올거
-    theMovie(){
-      return this.$store.state.movie.theMovie
-    },
-    loading(){
-      return this.$store.state.movie.loading
-    }
+    ...mapState('movie', [
+      'theMovie',
+      'loading'
+    ])
   },
   created(){
     this.$store.dispatch('movie/searchMovieWithId',{

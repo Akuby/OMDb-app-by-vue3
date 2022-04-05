@@ -1,5 +1,8 @@
 import axios from 'axios'
 import _uniqBy from 'lodash/uniqBy'
+
+const _defaultMessage = 'Search for the movie title!'
+
 export default {
   // module화 돼서 사용될 수 있음을 명시
   namespaced: true,
@@ -7,7 +10,7 @@ export default {
   // 참조형 데이터는, 하나의 함수로 그 안에서 객체 데이터 반환해야 데이터 불변성 문제가 없음
   state: () => ({
     movies: [], //영화의 목록
-    message : 'Search for the movie title!', //안내문
+    message : _defaultMessage, //안내문
     loading : false,
     theMovie : {}
   }),
@@ -21,6 +24,11 @@ export default {
       Object.keys(payload).forEach(key => {
         state[key] = payload[key]
       })
+    },
+    resetMovies(state){
+      state.movies = [],
+      state.message = _defaultMessage,
+      state.loading = false
     }
   },
   // 비동기로 동작
